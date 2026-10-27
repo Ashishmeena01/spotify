@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { getTrendingTracks, searchTracks } from '@/features/home/api/homeApi.js'
 
 function HomePage() {
+  const [searchParams] = useSearchParams()
   const [tracks, setTracks] = useState([])
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState('')
   const [query, setQuery] = useState('')
   const [searchResults, setSearchResults] = useState(null)
   const [searchStatus, setSearchStatus] = useState('idle')
+
+  useEffect(() => {
+    setQuery(searchParams.get('q') || '')
+  }, [searchParams])
 
   useEffect(() => {
     if (!query.trim()) {

@@ -1,6 +1,13 @@
-import { Link } from 'react-router'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 
 function NavbarSection() {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const [query, setQuery] = useState('')
+
+  useEffect(() => setQuery(searchParams.get('q') || ''), [searchParams])
+
   return (
     <nav className="navbar-section" aria-label="Main navigation">
       <Link className="navbar-brand" to="/" aria-label="Spotify home">
@@ -18,12 +25,15 @@ function NavbarSection() {
           </svg>
         </Link>
 
-        <form className="navbar-search" role="search" onSubmit={(event) => event.preventDefault()}>
+        <form className="navbar-search" role="search" onSubmit={(event) => {
+          event.preventDefault()
+          navigate(query.trim() ? `/?q=${encodeURIComponent(query.trim())}` : '/')
+        }}>
           <svg className="navbar-search__icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="10.8" cy="10.8" r="6.8" fill="none" stroke="currentColor" strokeWidth="2" />
             <path d="m16 16 4.3 4.3" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
           </svg>
-          <input type="search" aria-label="Search" placeholder="What do you want to play?" />
+          <input type="search" aria-label="Search" placeholder="What do you want to play?" value={query} onChange={(event) => setQuery(event.target.value)} />
           <span className="navbar-search__divider" aria-hidden="true" />
           <button type="button" className="navbar-search__browse" aria-label="Browse">
             <svg viewBox="0 0 24 24" aria-hidden="true">
