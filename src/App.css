@@ -199,6 +199,22 @@
   padding: 20px;
 }
 
+.home-section__filter { display: grid; max-width: 420px; gap: 7px; margin-top: 18px; color: #b3b3b3; font-size: 12px; font-weight: 700; }
+.home-section__filter input { box-sizing: border-box; width: 100%; min-height: 42px; padding: 0 14px; border: 1px solid #444; border-radius: 999px; color: #fff; background: #1f1f1f; font: inherit; font-weight: 400; }
+.home-section__filter input:focus-visible { outline: 2px solid #1ed760; outline-offset: 2px; }
+
+.library-list { display: grid; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
+.library-list__item { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-width: 0; padding: 9px; border-radius: 6px; }
+.library-list__item:hover { background: #1f1f1f; }
+.library-list__item a { display: grid; min-width: 0; gap: 4px; color: inherit; text-decoration: none; }
+.library-list__item strong, .library-list__item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.library-list__item strong { font-size: 13px; }
+.library-list__item span { color: #b3b3b3; font-size: 11px; }
+.library-list__item button { flex: 0 0 auto; border: 0; color: #b3b3b3; background: transparent; font-size: 20px; cursor: pointer; }
+.library-list__item button:hover { color: #fff; }
+.track-page__save { min-height: 40px; margin-top: 16px; padding: 0 18px; border: 0; border-radius: 999px; color: #000; background: #1ed760; font-weight: 700; cursor: pointer; }
+.track-page__save:hover { background: #3be477; }
+
 .home-section__heading {
   margin-bottom: 22px;
 }

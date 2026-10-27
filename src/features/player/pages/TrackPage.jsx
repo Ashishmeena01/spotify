@@ -2,12 +2,13 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { loadTrack } from '@/features/player/state/playerSlice.js'
+import { toggleSavedTrack } from '@/features/library/state/librarySlice.js'
 
 function TrackPage() {
-  console.log('TrackPage rendered')
   const { trackId } = useParams()
   const dispatch = useDispatch()
   const { currentTrack, status, error } = useSelector((state) => state.player)
+  const isSaved = useSelector((state) => state.library.savedTracks.some((item) => String(item.id) === trackId))
   const track = String(currentTrack?.id) === trackId ? currentTrack : null
 
  
@@ -44,6 +45,9 @@ function TrackPage() {
           <p>Track</p>
           <h1 id="track-title">{track.title}</h1>
           <p>{track.user?.name || 'Unknown artist'}</p>
+          <button className="track-page__save" type="button" onClick={() => dispatch(toggleSavedTrack(track))}>
+            {isSaved ? 'Remove from library' : 'Save to library'}
+          </button>
         </div>
       </div>
       <div className="track-page__details">
