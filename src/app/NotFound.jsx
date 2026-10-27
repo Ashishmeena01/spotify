@@ -1,10 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 function Error() {
   return (
-    <div className='text-center text-4xl font-bold mt-20'>
-      page not found
-    </div>
+    <main className="text-center text-white">
+      <h1>Page not found</h1>
+      <p>That page doesn’t exist.</p>
+      <Link to="/">Go to home</Link>
+    </main>
   )
 }
 
