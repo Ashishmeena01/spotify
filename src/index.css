@@ -9,3 +9,18 @@ body {
   min-width: 320px;
   background: #000;
 }
+
+.skip-link {
+  position: fixed;
+  z-index: 10;
+  top: 8px;
+  left: 8px;
+  padding: 10px 14px;
+  transform: translateY(-150%);
+  border-radius: 999px;
+  color: #000;
+  background: #1ed760;
+  font-weight: 700;
+}
+
+.skip-link:focus { transform: translateY(0); }

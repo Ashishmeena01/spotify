@@ -7,13 +7,14 @@ import LibrarySection from '@/features/library/pages/LibrarySection.jsx'
 function HomeLayout() {
   return (
     <div className="spotify-layout">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="spotify-layout__navbar">
         <NavbarSection />
       </header>
       <aside className="spotify-layout__library">
         <LibrarySection />
       </aside>
-      <main className="spotify-layout__home">
+      <main id="main-content" className="spotify-layout__home" tabIndex={-1}>
         <Outlet />
       </main>
       <div className="spotify-layout__now-playing">
