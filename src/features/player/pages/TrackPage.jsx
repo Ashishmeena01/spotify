@@ -4,12 +4,13 @@ import { useParams } from 'react-router'
 import { loadTrack } from '@/features/player/state/playerSlice.js'
 
 function TrackPage() {
+  console.log('TrackPage rendered')
   const { trackId } = useParams()
   const dispatch = useDispatch()
   const { currentTrack, status, error } = useSelector((state) => state.player)
   const track = String(currentTrack?.id) === trackId ? currentTrack : null
 
-  console.log('TrackPage', loadTrack(trackId)())
+ 
   useEffect(() => {
     const request = dispatch(loadTrack(trackId))
     return () => request.abort()
