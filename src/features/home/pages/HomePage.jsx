@@ -23,8 +23,9 @@ function HomePage() {
     }
 
     const controller = new AbortController()
+    setSearchResults(null)
+    setSearchStatus('loading')
     const timer = window.setTimeout(() => {
-      setSearchStatus('loading')
       searchTracks(query.trim(), { signal: controller.signal })
         .then((items) => {
           setSearchResults(items)
