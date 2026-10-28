@@ -1,8 +1,7 @@
 
 import { RouterProvider, createBrowserRouter } from 'react-router'
-import { lazy, useMemo } from 'react'
+import { lazy } from 'react'
 
-// const AuthLayout = lazy(()=>import('@/app/layouts/AuthLayout.jsx'))
 const HomeLayout = lazy(()=>import('@/app/layouts/HomeLayout'))
 const Error = lazy(()=>import('@/app/NotFound.jsx'))
 const HomePage = lazy(()=>import('@/features/home/pages/HomePage'))

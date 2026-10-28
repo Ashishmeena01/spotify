@@ -11,9 +11,7 @@ function TrackPage() {
   const isSaved = useSelector((state) => state.library.savedTracks.some((item) => String(item.id) === trackId))
   const track = String(currentTrack?.id) === trackId ? currentTrack : null
 
- 
   useEffect(() => {
-    
     const request = dispatch(loadTrack(trackId))
     return () => request.abort()
   }, [dispatch, trackId])
