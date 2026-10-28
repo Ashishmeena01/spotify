@@ -5,14 +5,14 @@ function NowPlayingSection() {
 
   if (!currentTrack) {
     return (
-      <aside className="now-playing-section" aria-label="Now playing">
+      <aside className="now-playing-section" aria-label="Now playing" aria-live="polite">
         <p>No song is playing</p>
       </aside>
     )
   }
 
   return (
-    <aside className="now-playing-section" aria-label="Now playing">
+    <aside className="now-playing-section" aria-label="Now playing" aria-live="polite">
       <h2>Now playing</h2>
       {currentTrack.artwork?.['480x480'] && (
         <img className="now-playing-section__artwork" src={currentTrack.artwork['480x480']} alt="" />
