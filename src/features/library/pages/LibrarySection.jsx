@@ -18,7 +18,7 @@ function LibrarySection() {
   return (
     <section className="library-section" aria-label="Your library">
       <h2>Your Library</h2>
-      <p className="library-section__count">{savedTracks.length} {savedTracks.length === 1 ? 'saved track' : 'saved tracks'}</p>
+      <p className="library-section__count" aria-live="polite">{savedTracks.length} {savedTracks.length === 1 ? 'saved track' : 'saved tracks'}</p>
       {savedTracks.length === 0 ? (
         <div className="library-empty">
           <span aria-hidden="true">♫</span>
