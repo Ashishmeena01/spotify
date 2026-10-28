@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import { loadTrack } from '@/features/player/state/playerSlice.js'
 import { toggleSavedTrack } from '@/features/library/state/librarySlice.js'
 
@@ -24,6 +24,7 @@ function TrackPage() {
     return (
       <section className="track-page">
         <p role="alert">{error || 'This track could not be loaded.'}</p>
+        <Link to="/">Back to discovery</Link>
       </section>
     )
   }
