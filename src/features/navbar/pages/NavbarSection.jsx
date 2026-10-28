@@ -34,12 +34,6 @@ function NavbarSection() {
             <path d="m16 16 4.3 4.3" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
           </svg>
           <input type="search" aria-label="Search" placeholder="What do you want to play?" value={query} onChange={(event) => setQuery(event.target.value)} />
-          <span className="navbar-search__divider" aria-hidden="true" />
-          <button type="button" className="navbar-search__browse" aria-label="Browse">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-            </svg>
-          </button>
         </form>
       </div>
 

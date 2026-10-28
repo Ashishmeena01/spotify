@@ -145,27 +145,6 @@
 .navbar-search input::placeholder { color: #b3b3b3; }
 .navbar-search input::-webkit-search-cancel-button { cursor: pointer; }
 
-.navbar-search__divider {
-  width: 1px;
-  height: 24px;
-  flex: 0 0 auto;
-  background: #7c7c7c;
-}
-
-.navbar-search__browse {
-  display: grid;
-  width: 28px;
-  height: 32px;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 0;
-  color: #b3b3b3;
-  background: transparent;
-  cursor: pointer;
-}
-
-.navbar-search__browse:hover { color: #fff; }
-.navbar-search__browse svg { width: 22px; height: 22px; }
 
 .navbar-actions {
   display: flex;
@@ -560,8 +539,6 @@
   .navbar-start { justify-content: flex-start; }
   .navbar-home { width: 42px; height: 42px; }
   .navbar-search { height: 42px; gap: 8px; padding: 0 10px; }
-  .navbar-search__browse,
-  .navbar-search__divider,
   .navbar-signup { display: none; }
   .navbar-actions { gap: 8px; }
   .navbar-login { min-width: 64px; height: 40px; font-size: 12px; }
