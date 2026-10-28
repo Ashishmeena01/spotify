@@ -6,7 +6,7 @@ export async function getTrendingTracks({ signal } = {}) {
     signal,
   })
 
-  return data.data || []
+  return Array.isArray(data.data) ? data.data : []
 }
 
 export async function searchTracks(query, { signal } = {}) {
@@ -15,5 +15,5 @@ export async function searchTracks(query, { signal } = {}) {
     signal,
   })
 
-  return data.data || []
+  return Array.isArray(data.data) ? data.data : []
 }

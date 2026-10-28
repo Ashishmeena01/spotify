@@ -22,36 +22,28 @@ function formatTime(seconds) {
 }
 
 function PlayerSection() {
-  console.log('PlayerSection rendered')
   const dispatch = useDispatch()
   const audioRef = useRef(null)
+  const elapsedRef = useRef(null)
+  const seekRef = useRef(null)
   const { currentTrack, isPlaying, status, error } = useSelector((state) => state.player)
   const [duration, setDuration] = useState(0)
   const [volume, setVolume] = useState(0.8)
   const [playbackError, setPlaybackError] = useState('')
 
-  const timeRef = useRef(null)
-
-  useEffect(() => {
-    let interval = null
-    if (isPlaying && audioRef.current && timeRef.current) {
-      interval = setInterval(() => {
-        if (timeRef.current) {
-          timeRef.current.textContent = formatTime(audioRef.current.currentTime)
-        }
-      }, 500)
-    } else if (!isPlaying && interval) {
-      clearInterval(interval)
-    }
-
-    return () => clearInterval(interval)
-  }, [isPlaying])
-
-
-
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume
   }, [volume, currentTrack?.id])
+
+  useEffect(() => {
+    setDuration(0)
+    setPlaybackError('')
+    if (elapsedRef.current) elapsedRef.current.textContent = formatTime(0)
+    if (seekRef.current) {
+      seekRef.current.value = '0'
+      seekRef.current.style.setProperty('--player-progress', '0%')
+    }
+  }, [currentTrack?.id])
 
   const togglePlayback = async () => {
     const audio = audioRef.current
@@ -75,7 +67,14 @@ function PlayerSection() {
     if (audioRef.current) audioRef.current.volume = nextVolume
   }
 
-  const progress = duration ? (currentTime / duration) * 100 : 0
+  const updateTimeDisplay = (time) => {
+    if (elapsedRef.current) elapsedRef.current.textContent = formatTime(time)
+    if (seekRef.current) {
+      seekRef.current.value = String(time)
+      const progress = duration ? (time / duration) * 100 : 0
+      seekRef.current.style.setProperty('--player-progress', `${progress}%`)
+    }
+  }
 
   return (
     <footer className="player-bar" aria-label="Audio player">
@@ -112,19 +111,20 @@ function PlayerSection() {
         </div>
 
         <div className="player-bar__timeline">
-          <span ref={timeRef}>{formatTime(0)}</span>
+          <span ref={elapsedRef}>{formatTime(0)}</span>
           <input
+            ref={seekRef}
             aria-label="Seek"
             type="range"
             min="0"
             max={duration || 0}
             step="0.1"
-            value={duration}
-            style={{ '--player-progress': `${progress}%` }}
+            defaultValue="0"
+            style={{ '--player-progress': '0%' }}
             disabled={!currentTrack || !duration}
-            onChange={(event) => {
+            onInput={(event) => {
               const time = Number(event.target.value)
-              setCurrentTime(time)
+              updateTimeDisplay(time)
               if (audioRef.current) audioRef.current.currentTime = time
             }}
           />
@@ -156,13 +156,18 @@ function PlayerSection() {
         key={currentTrack?.id || 'empty'}
         src={currentTrack?.streamUrl || undefined}
         preload="metadata"
-        onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
-        onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
+        onLoadedMetadata={(event) => {
+          const trackDuration = event.currentTarget.duration
+          setDuration(Number.isFinite(trackDuration) ? trackDuration : 0)
+          updateTimeDisplay(0)
+          setPlaybackError('')
+        }}
+        onTimeUpdate={(event) => updateTimeDisplay(event.currentTarget.currentTime)}
         onPlay={() => dispatch(setPlaying(true))}
         onPause={() => dispatch(setPlaying(false))}
         onEnded={() => {
           dispatch(setPlaying(false))
-          setCurrentTime(0)
+          updateTimeDisplay(0)
         }}
         onError={() => {
           if (currentTrack) setPlaybackError('This track could not be played.')

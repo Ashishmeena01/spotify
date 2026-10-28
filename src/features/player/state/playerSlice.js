@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import audiusApi from '@/config/audiusApi.js'
+import { useDispatch } from 'react-redux'
 
 export const loadTrack = createAsyncThunk(
   'player/loadTrack',
@@ -7,7 +8,6 @@ export const loadTrack = createAsyncThunk(
     try {
       const { data } = await audiusApi.get(`/tracks/${encodeURIComponent(trackId)}`)
       const track = data.data
-
       return {
         ...track,
         streamUrl: audiusApi.getUri({
@@ -23,10 +23,11 @@ export const loadTrack = createAsyncThunk(
 )
 
 
+
 const playerSlice = createSlice({
   name: 'player',
   initialState: {
-    currentTrack: null,
+    currentTrack: "fasjfjsdjflk",
     isPlaying: false,
     status: 'idle',
     error: null,
@@ -69,4 +70,9 @@ const playerSlice = createSlice({
 })
 
 export const { setPlaying, clearTrack, add1Track } = playerSlice.actions
+
+
+
+
+
 export default playerSlice.reducer

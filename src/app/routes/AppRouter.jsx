@@ -1,13 +1,15 @@
 
 import { RouterProvider, createBrowserRouter } from 'react-router'
-import AuthLayout from '@/app/layouts/AuthLayout.jsx'
-import Error from '@/app/NotFound.jsx'
-import HomeLayout from '@/app/layouts/HomeLayout.jsx'
-import LoginPage from '@/features/auth/pages/LoginPage.jsx'
-import RegisterPage from '@/features/auth/pages/RegisterPage.jsx'
-import HomePage from '@/features/home/pages/HomePage.jsx'
-import TrackPage from '@/features/player/pages/TrackPage.jsx'
+import { lazy, useMemo } from 'react'
 
+// const AuthLayout = lazy(()=>import('@/app/layouts/AuthLayout.jsx'))
+const HomeLayout = lazy(()=>import('@/app/layouts/HomeLayout'))
+const Error = lazy(()=>import('@/app/NotFound.jsx'))
+const HomePage = lazy(()=>import('@/features/home/pages/HomePage'))
+const TrackPage = lazy(()=>import('@/features/player/pages/TrackPage'))
+const RegisterPage = lazy(()=>import('@/features/auth/pages/RegisterPage'))
+const LoginPage = lazy(()=>import('@/features/auth/pages/LoginPage'))
+import AuthLayout from '../layouts/AuthLayout'
 
 const router = createBrowserRouter([
     {
@@ -43,6 +45,7 @@ const router = createBrowserRouter([
     },
  
 ])
+
 
 function AppRouter() {
     return (
