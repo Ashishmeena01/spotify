@@ -1,0 +1,33 @@
+.skeleton {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 5px;
+  background: linear-gradient(100deg, #252525 25%, #353535 40%, #252525 60%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.35s ease-in-out infinite;
+}
+
+.skeleton--circle { border-radius: 50%; }
+.skeleton--artwork { width: 100%; aspect-ratio: 1; border-radius: 5px; }
+.skeleton--title { width: 78%; margin-top: 12px; }
+.skeleton--artist { width: 56%; margin-top: 7px; }
+.skeleton--button { width: 100%; margin-top: 12px; border-radius: 999px; }
+
+.track-card--skeleton { background: #181818; }
+.track-page__hero--skeleton { align-items: flex-end; }
+.track-page__artwork-skeleton { width: clamp(150px, 25vw, 240px); aspect-ratio: 1; flex: 0 0 auto; border-radius: 8px; }
+.track-page__text-skeleton { display: grid; width: min(100%, 520px); gap: 15px; }
+.track-page__description-skeleton { width: min(100%, 680px); margin-top: 14px; }
+
+@keyframes skeleton-shimmer {
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+}
+
+@media (max-width: 560px) {
+  .track-page__artwork-skeleton { width: min(100%, 220px); }
+}
