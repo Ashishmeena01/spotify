@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 
 function LoginPage() {
+  console.log('LoginPage rendered')
   return (
     <section className="auth-card" aria-labelledby="login-title">
       <div className="auth-card__intro">
