@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router'
 import { loadTrack } from '@/features/player/state/playerSlice.js'
 import { toggleSavedTrack } from '@/features/library/state/librarySlice.js'
+import { TrackPageSkeleton } from '@/components/Skeleton.jsx'
 
 function TrackPage() {
+  console.log('TrackPage rendered')
   const { trackId } = useParams()
   const dispatch = useDispatch()
   const { currentTrack, status, error } = useSelector((state) => state.player)
@@ -17,7 +19,7 @@ function TrackPage() {
   }, [dispatch, trackId])
 
   if (status === 'loading' && !track) {
-    return <section className="track-page"><p role="status">Loading track...</p></section>
+    return <TrackPageSkeleton />
   }
 
   if (status === 'failed' && !track) {
