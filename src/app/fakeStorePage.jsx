@@ -1,10 +1,11 @@
-    import React from 'react'
+    import React, { useEffect, useState } from 'react'
 
     export function FakeStorePage() {
         const [products, setProducts] = React.useState([]);
         const [searchValue, setSearchValue] = React.useState('');
         const [filteredProducts, setFilteredProducts] = React.useState([]);
         const [loading, setLoading] = React.useState(true);
+        const [test,setTest] = useState("FakeStore");
 
         function fetchProducts() {
             fetch('https://fakestoreapi.com/products')
@@ -27,14 +28,33 @@
             setFilteredProducts(filtered);
         }
 
-        React.useEffect(() => {
+        
+        useEffect(()=>{
             fetchProducts();
-        }, []);
+            let lastTime = Date.now();
+
+
+            const ev = () =>{
+                console.log("scrolling");
+                let currTime = Date.now();
+
+                if(currTime - lastTime >= 2000){
+                    console.log("setting the timeer");
+                    setTest(`${lastTime}:headliner`);
+                    lastTime = currTime;
+                }
+            }
+
+            document.addEventListener("scroll",ev);
+
+            return () => document.removeEventListener("scroll",ev);
+
+        },[])
 
         React.useEffect(() => {
             let timeout = setTimeout(() => {
                 console.log('searchValue changed', searchValue);
-            filterProducts()
+                 filterProducts()
             }, 500)
 
         return () => clearInterval(timeout);
@@ -42,7 +62,7 @@
 
         return (
             <div className="bg-black text-white p-4">
-                <h1>Fake Store</h1>
+                <h1 className='sticky top-2'>{test}</h1>
                 <input
                     className="border border-gray-300 rounded p-2 mb-4 w-full"
                     type="text"
