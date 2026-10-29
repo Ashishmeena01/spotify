@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 
 function RegisterPage() {
+  console.log('RegisterPage rendered')
   return (
     <section className="auth-card auth-card--register" aria-labelledby="register-title">
       <div className="auth-card__intro">
